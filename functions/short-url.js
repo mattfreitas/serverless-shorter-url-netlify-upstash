@@ -43,11 +43,11 @@ async function generateUniqueShorterUrl(length, destinationUrl) {
     }
 
     let saveUrl = await redisClient.set(`url_${uniqueString}`, destinationUrl);
-
+    
     return {
-        "shorterUrl": `${process.env.BASE_URL}/${uniqueString}`,
+        "success": (saveUrl == "OK") ? true:false,
+        "shorterUrl": `${process.env.BASE_URL}/r/${uniqueString}`,
         "destinationUrl": destinationUrl,
-        "result": saveUrl
     }
 }
 
@@ -64,7 +64,8 @@ exports.handler = async function(event, context) {
 
     const request = JSON.parse(event.body);
     const generateShorterUrl = await generateUniqueShorterUrl(8, request.url);
-
+    redisClient.quit();
+    
     return {
         statusCode: 200,
         body: JSON.stringify(generateShorterUrl)

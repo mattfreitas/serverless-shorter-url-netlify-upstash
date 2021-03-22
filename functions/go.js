@@ -22,7 +22,8 @@
 
      const splitUrlPathAndGetLast = event.path.substring(1).split('/').pop();
      const getRedirectUrl = await redisClient.get(`url_${splitUrlPathAndGetLast}`);
-
+     redisClient.quit();
+     
      return {
          statusCode: 301,
          headers: {
