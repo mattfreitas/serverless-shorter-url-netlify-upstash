@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
+
+/* purgecss start ignore */
+@tailwind  base;
+@tailwind  components;
+/* purgecss end ignore */
+
+@tailwind  utilities;
+
+
+body {
+    font-family: 'Inter';
+}
+
+.nav-link {
+    @apply text-gray-400 font-semibold hover:text-white transition duration-200
+}
+
+.nav-link.active {
+    @apply text-white !important
+}
+
+.header-navigator {
+    min-height: 600px;
+    background: url(../img/backgrounds/bg-header.png);
+    background-size: cover;
+}
+
+#focus-on {
+    background: linear-gradient(180deg, #EFF6FF 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+#for-brazilian-creators-footer {
+    background-image:  url(../img/sprites/bg-brazillian-creators.png);
+    height: 276px;
+    background-size: auto 276px;
+    background-repeat: repeat-x;
+    background-position: center;
+}
+
+#partners {
+    background-image: url(../img/backgrounds/partners.png);
+    background-size: cover;
+}
