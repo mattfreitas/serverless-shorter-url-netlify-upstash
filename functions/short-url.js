@@ -27,9 +27,11 @@ function makeid(length) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
+
     for ( var i = 0; i < length; i++ ) {
        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
+
     return result;
 }
 
@@ -51,6 +53,7 @@ async function generateUniqueShorterUrl(length, destinationUrl) {
     let saveUrl = await redisClient.set(`url_${uniqueString}`, destinationUrl);
     let incrementSavedUrlVisits = await redisClient.incr(`url_visits_${uniqueString}`);
     let totalSavedUrls = await redisClient.incr('total_saved_urls');
+    redisClient.quit();
     
     return {
         "success": (saveUrl == "OK") ? true:false,
