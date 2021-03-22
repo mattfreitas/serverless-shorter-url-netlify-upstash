@@ -2,7 +2,8 @@
  * Serverless Function Requirements
  */
 const redis = require('redis');
-const redisClient = redis.createClient({
+const asyncRedis = require("async-redis");
+const redisClient = asyncRedis.createClient({
     host : process.env.REDIS_HOST,
     port : process.env.REDIS_PORT,
     password: process.env.REDIS_PASSWORD
@@ -44,8 +45,9 @@ async function generateUniqueShorterUrl(length, destinationUrl) {
     let saveUrl = await redisClient.set(`url_${uniqueString}`, destinationUrl);
 
     return {
-        "shorterUrl": uniqueString,
+        "shorterUrl": `${process.env.BASE_URL}/${uniqueString}`,
         "destinationUrl": destinationUrl,
+        "result": saveUrl
     }
 }
 
@@ -61,10 +63,10 @@ exports.handler = async function(event, context) {
     }
 
     const request = JSON.parse(event.body);
-    // const generateUrlShorterVersionKey = await generateUniqueShorterUrl(8, request.url);
+    const generateShorterUrl = await generateUniqueShorterUrl(8, request.url);
 
     return {
         statusCode: 200,
-        body: JSON.stringify(event)
+        body: JSON.stringify(generateShorterUrl)
     };
 }

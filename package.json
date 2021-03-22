@@ -12,5 +12,7 @@
     "redis": "^3.0.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "async-redis": "^1.1.7"
+  }
 }

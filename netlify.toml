@@ -5,6 +5,11 @@
   functions = "functions"
 
 [[redirects]]
-  from = "/app/*"
-  to = "/.netlify/functions/:splat"
+  from = "/app/short-url"
+  to = "/.netlify/functions/short-url"
+  status = 200
+
+[[redirects]]
+  from = "/r/*"
+  to = "/.netlify/functions/go/:splat"
   status = 200
