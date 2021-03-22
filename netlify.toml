@@ -1,0 +1,10 @@
+[build]
+  functions = "functions"
+
+[dev]
+  functions = "functions"
+
+[[redirects]]
+  from = "/app/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
