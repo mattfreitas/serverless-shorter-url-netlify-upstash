@@ -1,6 +1,7 @@
 /**
  * Serverless Function Requirements
  */
+const fetch = require("node-fetch");
 const redis = require('redis');
 const asyncRedis = require("async-redis");
 const redisClient = asyncRedis.createClient({
@@ -8,6 +9,12 @@ const redisClient = asyncRedis.createClient({
     port : process.env.REDIS_PORT,
     password: process.env.REDIS_PASSWORD
 });
+
+/**
+ * Shorter App Configurations
+ */
+const shortUrlSize = 8;
+const recaptchaPrivateKey = process.env.RECAPTCHA_PRIVATE_KEY;
 
 /**
  * Creates a random string.
@@ -23,7 +30,6 @@ function makeid(length) {
     for ( var i = 0; i < length; i++ ) {
        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-
     return result;
 }
 
@@ -43,12 +49,31 @@ async function generateUniqueShorterUrl(length, destinationUrl) {
     }
 
     let saveUrl = await redisClient.set(`url_${uniqueString}`, destinationUrl);
+    let incrementSavedUrlVisits = await redisClient.incr(`url_visits_${uniqueString}`);
+    let totalSavedUrls = await redisClient.incr('total_saved_urls');
     
     return {
         "success": (saveUrl == "OK") ? true:false,
         "shorterUrl": `${process.env.BASE_URL}/r/${uniqueString}`,
         "destinationUrl": destinationUrl,
     }
+}
+
+/**
+ * Verify if the given recaptcha token is valid.
+ * 
+ * @param {String} Token generated from the front-end. 
+ * @returns Boolean
+ */
+async function validateRecaptchaToken(token) {
+    const validateRecaptchaRequest = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+        method: 'POST',
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `secret=${recaptchaPrivateKey}&response=${token}`
+    });
+
+    const recaptchaResponse = await validateRecaptchaRequest.json();
+    return recaptchaResponse;
 }
 
 exports.handler = async function(event, context) {
@@ -63,7 +88,19 @@ exports.handler = async function(event, context) {
     }
 
     const request = JSON.parse(event.body);
-    const generateShorterUrl = await generateUniqueShorterUrl(8, request.url);
+    const validateRequestWithRecaptcha = await validateRecaptchaToken(request.token);
+
+    if(!validateRequestWithRecaptcha.success) {
+        return {
+            statusCode: 200,
+            body: JSON.stringify({
+                "success": false,
+                "message": "Oops. Try again. Recaptcha validation failed.",
+            })
+        };
+    }
+
+    const generateShorterUrl = await generateUniqueShorterUrl(shortUrlSize, request.url);
     redisClient.quit();
     
     return {
