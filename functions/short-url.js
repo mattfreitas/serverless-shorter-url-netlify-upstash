@@ -53,7 +53,6 @@ async function generateUniqueShorterUrl(length, destinationUrl) {
     let saveUrl = await redisClient.set(`url_${uniqueString}`, destinationUrl);
     let incrementSavedUrlVisits = await redisClient.incr(`url_visits_${uniqueString}`);
     let totalSavedUrls = await redisClient.incr('total_saved_urls');
-    redisClient.quit();
     
     return {
         "success": (saveUrl == "OK") ? true:false,
@@ -104,7 +103,6 @@ exports.handler = async function(event, context) {
     }
 
     const generateShorterUrl = await generateUniqueShorterUrl(shortUrlSize, request.url);
-    redisClient.quit();
     
     return {
         statusCode: 200,

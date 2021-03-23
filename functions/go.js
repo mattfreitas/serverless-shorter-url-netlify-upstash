@@ -24,8 +24,6 @@
     const getRedirectUrl = await redisClient.get(`url_${splitUrlPathAndGetLast}`);
     const incrementRedirectUrlVisits = await redisClient.incr(`url_visits_${splitUrlPathAndGetLast}`);
 
-    redisClient.quit();
-
     return {
         statusCode: 301,
         headers: {
