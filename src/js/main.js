@@ -49,7 +49,6 @@
         });
      
         buttonNotARobot.classList.remove('hidden');
-    
     }
 
     /**
@@ -87,7 +86,7 @@
     function displayError(message) {
         return alert(message);
     }
-    
+
     /**
      * Updates the UI with the shorter URL information.
      * 
@@ -111,7 +110,6 @@
     function copyShortenedUrl() {
         inputCopyShortenedUrl.select();
         document.execCommand("copy");
-        console.log('here')
     }
 
     /**
