@@ -24,7 +24,7 @@ The installation is simple once you are registered in **Netlify**. Please note t
 - Clone this project
 - Run **npm run install** in the projects folder
 - Configure your environment variables in **Netlify** (see below how)
-- Push your project to **Netlify**  or run **netlify dev --live** (note: you must install netlify-cli before, see how [See how here.](https://docs.netlify.com/cli/get-started/)
+- Push your project to **Netlify**  or run **netlify dev --live** (note: you must install netlify-cli before, see how [here.](https://docs.netlify.com/cli/get-started/)
 
 ### Configuring Netlify Environment Variables
 The good thing about Netlify is that we can use our environment variables in production and local. You must configure the following variables to work with this project without problems when running netlify dev --live:
