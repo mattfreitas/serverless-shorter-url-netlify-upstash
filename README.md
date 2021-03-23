@@ -1,7 +1,6 @@
 # Short URL with Serverless + Redis + Netlify
-## Create your own "short url" service in minutes, not days.
-
-Try it here: https://serverless-url-shortener-upstash.netlify.app
+### Create your own "short url" service in minutes, not days.
+##### Try it here: https://serverless-url-shortener-upstash.netlify.app
 ---
 This project aims to create a scalable and open-source solution alternative to Bit.ly, Tinyurl, Goo.gl, etc. If you want:
 
