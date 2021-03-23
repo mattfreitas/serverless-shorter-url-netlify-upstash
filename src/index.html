@@ -24,10 +24,10 @@
             <p id="confirm-status-success" class="hidden when-successfully-shorted text-green-600 my-5 text-center">URL successfully shorted.</p>
             <p id="confirm-status-error" class="hidden when-shorted-failed text-red-600 mt-5 text-center">Oops. Please, refresh the page and try again.</p>
             
-            <div class="bg-gray-100 p-5 rounded when-successfully-shorted relative">
+            <div class="bg-gray-100 p-5 rounded when-successfully-shorted relative hidden">
                 <p class="text-xs text-gray-400 uppercase">Shortened URL</p>
                 <p id="shortened-url" class="text-lg">https://google.com.br</p>
-                <input type="text" class="opacity-0 h-0" id="shortened-url-input">
+                <input type="text" class="absolute top-0 left-0 opacity-0 h-0" id="shortened-url-input" value="hello">
                 <span id="button-copy" class="absolute top-0 right-3 text-xs uppercase px-2 py-1 bg-purple-600 text-white hover:bg-purple-500 cursor-pointer rounded-br rounded-bl">Copy</span>
             </div>
         
