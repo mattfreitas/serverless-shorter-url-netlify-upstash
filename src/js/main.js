@@ -25,6 +25,10 @@
      * we avoid bots and flood.
      */
      function openConfirmationModal() {
+        if(!inputShortUrl.value.length) {
+            return displayError('Fill the URL before continue.');
+        }
+
         modalConfirmationNotARobot.forEach((item) => {
             item.classList.remove("hidden");
             item.classList.add("opacity-100");
@@ -73,6 +77,17 @@
         });
     }
 
+    /**
+     * Display an error for the user. Right now it'll use alert
+     * but in the next versions it'll become a custom alert.
+     * 
+     * @param {String} Message to be displayed 
+     * @return Void
+     */
+    function displayError(message) {
+        return alert(message);
+    }
+    
     /**
      * Updates the UI with the shorter URL information.
      * 
