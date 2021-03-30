@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/main.css" />
     </head>
 
-    <body class="bg-purple-50 h-full">
+    <body class="bg-purple-50 h-full mb-32">
         <!-- Confirmation -->
         <div id="overlay" class="modal-confirmation-group hidden fixed top-0 left-0 w-full h-full bg-indigo-800 bg-opacity-40 z-10"></div>
         <div class="modal-confirmation-group hidden shadow-2xl bg-white mx-auto mt-32 w-full p-10 absolute z-20 left-0 right-0 max-w-lg">
@@ -35,15 +35,28 @@
 
 
         <nav class="bg-white shadow-sm py-4 text-center text-gray-700">Serverless URL Shortener</nav>
-        <div class="container mx-auto pt-24 text-center px-10 md:px-0">
-            <h1 class="text-6xl font-semibold tracking-tight">Create shorter links for your urls.</h1>
-            <div class="relative max-w-2xl mx-auto">
+        <div class="container mx-auto pt-24 px-10 md:px-0">
+            <h1 class="text-6xl font-semibold text-center  tracking-tight">Create shorter links for your urls.</h1>
+            <div class="relative max-w-2xl mx-auto mt-5">
                 <input id="input-short-url" type="text" class="bg-white w-full py-4 shadow-2xl border-2 border-white focus:border-purple-500 transition duration-300 rounded-lg mt-5 focus:outline-none px-4" placeholder="https://yourdomain.com">
                 <button id="button-short-url" class="focus:outline-none bg-purple-700 text-white p-2 rounded-full absolute right-2 top-7 hover:bg-purple-500">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                 </button>
+            </div>
+
+            <div class="bg-white max-w-2xl mx-auto p-10 shadow-lg rounded-lg mt-24">
+                <h2 class="text-3xl font-semibold tracking-tight mb-3">Check visits count</h2>
+                <p class="text-gray-600 mb-5">Paste the URL code above and see how many visits you got in your link.</p>
+                
+                <div class="flex flex-col">
+                    <input id="shortened-url-visit-result" type="text" class="mb-3 placeholder-gray-300 w-full border-b-2 border-gray-300 py-3 text-center focus:outline-none focus:border-purple-700 transition duration-200" placeholder="Code example: E62SpiUa">
+                    <button id="getVisitsButton" class="disable:opacity-30 mb-5 bg-purple-50 hover:bg-purple-100 rounded-lg focus:outline-none focus:bg-purple-200 text-purple-500 px-5 py-3">Check</button>
+                    <p id="visits-result-holder" class="text-3xl text-center pt-4 hidden">
+                        <span id="visits-result" class="font-bold">5137</span> visits
+                    </p>
+                </div>
             </div>
         </div>
 

@@ -13,3 +13,8 @@
   from = "/r/*"
   to = "/.netlify/functions/go/:splat"
   status = 200
+
+[[redirects]]
+  from = "/v/*"
+  to = "/.netlify/functions/details/:splat"
+  status = 200

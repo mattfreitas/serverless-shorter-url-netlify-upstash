@@ -86,7 +86,7 @@ exports.handler = async function(event, context) {
                 "success": false,
                 "message": "Invalid method."
             })
-        };
+        }
     }
 
     const request = JSON.parse(event.body);
@@ -99,7 +99,7 @@ exports.handler = async function(event, context) {
                 "success": false,
                 "message": "Oops. Try again. Recaptcha validation failed.",
             })
-        };
+        }
     }
 
     const generateShorterUrl = await generateUniqueShorterUrl(shortUrlSize, request.url);
