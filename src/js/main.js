@@ -131,7 +131,7 @@
         
         buttonGetVisits.setAttribute('disabled', 'disabled');
         
-        let request = fetch(`https://serverless-url-shortener-upstash-feb0ee.netlify.live/v/${urlToBeRetrieved}`).then((response) => response.json()).then((response) => {
+        let request = fetch(`/v/${urlToBeRetrieved}`).then((response) => response.json()).then((response) => {
             visitsResult.innerHTML = response.data.visitsCount;
             visitsResultHolder.classList.remove('hidden');
             buttonGetVisits.removeAttribute('disabled');
