@@ -120,18 +120,39 @@
     }
 
     /**
+     * Validate the content of the inputed url to retrieve analytics.
+     * 
+     * @returns Boolean 
+     */
+    function validateInputedShortenedUrl(shortenedUrl) {
+        if(!shortenedUrl.length) {
+            return false;
+        }
+
+        if(shortenedUrl.includes('/') || shortenedUrl.includes('.')) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Search the API and retrieve the visit count of a determined url.
      */
     function getUrlVisitsCount() {
         const urlToBeRetrieved = inputShortenedUrlVisitCount.value;
 
-        if(!urlToBeRetrieved.length) {
-            return displayError('Fill the URL before continue.');
+        if(!validateInputedShortenedUrl(urlToBeRetrieved)) {
+            return displayError('Fill a valid value before continue (no full links are allowed).');
         }
         
         buttonGetVisits.setAttribute('disabled', 'disabled');
         
         let request = fetch(`/v/${urlToBeRetrieved}`).then((response) => response.json()).then((response) => {
+            if(!response.success) {
+                return displayError('No shortened urls was found.');
+            }
+            
             visitsResult.innerHTML = response.data.visitsCount;
             visitsResultHolder.classList.remove('hidden');
             buttonGetVisits.removeAttribute('disabled');
